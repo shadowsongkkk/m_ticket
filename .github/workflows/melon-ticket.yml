@@ -1,0 +1,18 @@
+name: Melon Ticket Monitor
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # 每5分钟检查一次
+  workflow_dispatch:  # 支持手动触发
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Melon Ticket Checker
+        env:
+          MELON_USER: ${{ secrets.MELON_USER }}  # GitHub Secrets 存储账号
+          MELON_PASS: ${{ secrets.MELON_PASS }}
+          PRODUCT_ID: "12345"  # 替换为目标演出ID
+          SCHEDULE_ID: "67890"
+        run: |
+          # 这里填写运行脚本的命令（如 Python 脚本或项目提供的 CLI 工具）
